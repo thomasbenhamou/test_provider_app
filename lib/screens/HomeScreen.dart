@@ -6,10 +6,30 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: FlatButton.icon(
-              onPressed: () => Navigator.pushNamed(context, '/checklistHome'),
-              icon: Icon(Icons.fiber_new),
-              label: Text("Nouvelle checklist")),
+          child: Column(
+            children: <Widget>[
+              Flexible(
+                flex: 1,
+                child: Container(
+                  color: Colors.orangeAccent,
+                  child: FlatButton.icon(
+                      onPressed: () => Navigator.pushNamed(context, '/checklistHome'),
+                      icon: Icon(Icons.fiber_new),
+                      label: Text("Nouvelle checklist")),
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Container(
+                  color: Colors.redAccent,
+                  child: FlatButton.icon(
+                      onPressed: () => Navigator.pushNamed(context, '/history'),
+                      icon: Icon(Icons.history),
+                      label: Text("Historique")),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

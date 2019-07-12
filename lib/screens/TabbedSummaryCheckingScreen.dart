@@ -20,7 +20,7 @@ class TabbedSummaryCheckingScreen extends StatelessWidget {
                 label: Text("Résumé"),
                 onPressed: () => Navigator.pushNamed(context, '/checklistSummary')),
           ],
-          leading: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.pushNamed(context, '/')),
+          leading: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.pop(context)),
         ),
         body: TabBarView(
           children: [

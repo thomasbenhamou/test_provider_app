@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
 import 'package:test_provider_app/screens/HomeScreen.dart';
+import 'package:test_provider_app/screens/HistoryScreen.dart';
+import 'screens/SaveChecklistScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
           '/detailCheckingExterior': (context) => ExteriorDetailCheckingScreen(),
           '/detailCheckingPapers': (context) => PapersDetailCheckingScreen(),
           '/detailCheckingEngine': (context) => EngineDetailCheckingScreen(),
+          '/history': (context) => HistoryScreen(),
+          '/saveChecklist': (context) => SaveChecklistScreen(),
       },
       ),
     );

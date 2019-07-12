@@ -6,6 +6,22 @@ class ChecksModel extends ChangeNotifier {
   Map<int, bool> papers = {1: false, 2: false, 3: false};
   Map<int, bool> engine = {1: false, 2: false, 3: false};
 
+/*  void clearState() {
+    interior.forEach((i, state) {
+      interior[i] = false;
+    });
+    exterior.forEach((i, state) {
+      interior[i] = false;
+    });
+    papers.forEach((i, state) {
+      interior[i] = false;
+    });
+    engine.forEach((i, state) {
+      interior[i] = false;
+    });
+    notifyListeners();
+  }*/
+
   void checkInterior(int checkNb) {
     interior[checkNb] = true;
     notifyListeners();

@@ -3,13 +3,15 @@ import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:provider/provider.dart';
 
 class SummaryCheckingScreen extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           FlatButton.icon(
-              onPressed: null,
+              onPressed: () => Navigator.pushNamed(context, '/saveChecklist'),
               icon: Icon(Icons.save),
               label: Text("Enregistrer"))
         ],
@@ -76,9 +78,14 @@ class SummaryCheckingScreen extends StatelessWidget {
               },
             ),
           ),
-        Center(
-          child: FlatButton.icon(icon: Icon(Icons.edit), onPressed: null, label: Text("Ajouter une note"), ),
-        )],
+          Center(
+            child: FlatButton.icon(
+              icon: Icon(Icons.edit),
+              onPressed: null,
+              label: Text("Ajouter une note"),
+            ),
+          )
+        ],
       )),
     );
   }
