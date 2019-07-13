@@ -17,14 +17,15 @@ class ChecklistService {
   }
 
   saveChecks(String category, Map<int, bool> checks, int checkListId) async {
-    checks.forEach((nb, state) {
+    checks.forEach((nb, state) async {
         Check check = new Check();
         check.category = category;
         check.nb = nb;
         check.state = state;
         check.checklistid = checkListId;
-        DBProvider.db.saveCheck(check);
+        await DBProvider.db.saveCheck(check);
     });
   }
+
 
 }

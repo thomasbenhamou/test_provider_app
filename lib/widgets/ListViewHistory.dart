@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/db/ChecklistModel.dart';
+import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
 
 class ListViewHistory extends StatefulWidget {
   @override
@@ -61,16 +62,28 @@ class _ListViewHistoryState extends State<ListViewHistory> {
                   duration: Duration(milliseconds: 600),
                 ));
               },
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(items[position].name),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TabbedSummaryCheckingScreen(checkListId: items[position].id),
+                    ),
+                  );
+                },
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(items[position].name),
+                  ),
                 ),
               ),
             );
           });
     }
   }
+
+  // TODO : load the checklist
 }
 
 Widget dismissibleBackground() {

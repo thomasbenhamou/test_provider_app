@@ -95,4 +95,17 @@ class DBProvider {
     return result.toList();
   }
 
+  Future<List<Check>> getAllChecksForAChecklistId(int checklistid) async {
+    final db = await database;
+    List<Check> items = new List();
+    var result = await db.query("Checks", where: "checklistid = ?", whereArgs: [checklistid]);
+    result.forEach( (jsonCheck) {
+      Check c = Check.fromJson(jsonCheck);
+      print(c.state);
+      items.add(c);
+    });
+    return items;
+  }
+
+
 }
