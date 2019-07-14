@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/db/ChecklistModel.dart';
 import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
+import 'package:test_provider_app/service/ChecklistService.dart';
 
 class ListViewHistory extends StatefulWidget {
   @override
@@ -35,7 +36,9 @@ class _ListViewHistoryState extends State<ListViewHistory> {
             Text("Vous n'avez pas encore créé de checklist :("),
             FlatButton.icon(
               padding: EdgeInsets.all(20.0),
-                onPressed: () => Navigator.pushNamed(context, '/checklistHome'),
+                onPressed: () {
+                  ChecklistService.svc.confirmReset(context);
+                },
                 icon: Icon(Icons.assignment_turned_in),
                 label: Text("Créer une checklist")
             )
@@ -83,7 +86,6 @@ class _ListViewHistoryState extends State<ListViewHistory> {
     }
   }
 
-  // TODO : load the checklist
 }
 
 Widget dismissibleBackground() {

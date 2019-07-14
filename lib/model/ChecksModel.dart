@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
 
 class ChecksModel extends ChangeNotifier {
+
   Map<int, bool> interior = {1: false, 2: false, 3: false};
   Map<int, bool> exterior = {1: false, 2: false, 3: false};
   Map<int, bool> papers = {1: false, 2: false, 3: false};
   Map<int, bool> engine = {1: false, 2: false, 3: false};
 
-/*  void clearState() {
+  bool isPristine = true;
+
+  void unCheckAll() {
     interior.forEach((i, state) {
       interior[i] = false;
     });
     exterior.forEach((i, state) {
-      interior[i] = false;
+      exterior[i] = false;
     });
     papers.forEach((i, state) {
-      interior[i] = false;
+      papers[i] = false;
     });
     engine.forEach((i, state) {
-      interior[i] = false;
+      engine[i] = false;
     });
+    isPristine = true;
     notifyListeners();
-  }*/
+  }
 
   void checkInterior(int checkNb) {
     interior[checkNb] = true;
+    isPristine = false;
     notifyListeners();
   }
 
   void unCheckInterior(int checkNb) {
     interior[checkNb] = false;
+    isPristine = false;
     notifyListeners();
   }
 
@@ -44,11 +50,13 @@ class ChecksModel extends ChangeNotifier {
 
   void checkExterior(int checkNb) {
     exterior[checkNb] = true;
+    isPristine = false;
     notifyListeners();
   }
 
   void unCheckExterior(int checkNb) {
     exterior[checkNb] = false;
+    isPristine = false;
     notifyListeners();
   }
 
@@ -64,11 +72,13 @@ class ChecksModel extends ChangeNotifier {
 
   void checkPapers(int checkNb) {
     papers[checkNb] = true;
+    isPristine = false;
     notifyListeners();
   }
 
   void unCheckPapers(int checkNb) {
     papers[checkNb] = false;
+    isPristine = false;
     notifyListeners();
   }
 
@@ -84,11 +94,13 @@ class ChecksModel extends ChangeNotifier {
 
   void checkEngine(int checkNb) {
     engine[checkNb] = true;
+    isPristine = false;
     notifyListeners();
   }
 
   void unCheckEngine(int checkNb) {
     engine[checkNb] = false;
+    isPristine = false;
     notifyListeners();
   }
 

@@ -8,6 +8,7 @@ import 'PapersDetailCheckingScreen.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 
 class TabbedSummaryCheckingScreen extends StatelessWidget {
+
   int checkListId;
 
   TabbedSummaryCheckingScreen({this.checkListId});
@@ -68,7 +69,7 @@ class TabbedSummaryCheckingScreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/checklistSummary')),
           ],
           leading: IconButton(
-              icon: Icon(Icons.home), onPressed: () => Navigator.pop(context)),
+              icon: Icon(Icons.home), onPressed: () => Navigator.pushNamed(context, "/")),
         ),
         body: TabBarView(
           children: [
