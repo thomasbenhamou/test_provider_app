@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.orangeAccent,
                   child: FlatButton.icon(
                       onPressed: () {
-                        //confirmReset(context);
                         ChecklistService.svc.confirmReset(context);
                       },
                       icon: Icon(Icons.fiber_new),

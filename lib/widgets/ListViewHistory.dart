@@ -70,7 +70,7 @@ class _ListViewHistoryState extends State<ListViewHistory> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TabbedSummaryCheckingScreen(checkListId: items[position].id),
+                      builder: (context) => TabbedSummaryCheckingScreen(checkListId: items[position].id, checkListName: items[position].name),
                     ),
                   );
                 },

@@ -9,6 +9,11 @@ class ChecksModel extends ChangeNotifier {
 
   bool isPristine = true;
 
+  int currentCheckListId;
+  String currentCheckListName = "";
+
+  String note = "";
+
   void unCheckAll() {
     interior.forEach((i, state) {
       interior[i] = false;
@@ -22,7 +27,29 @@ class ChecksModel extends ChangeNotifier {
     engine.forEach((i, state) {
       engine[i] = false;
     });
+    note = "";
     isPristine = true;
+    notifyListeners();
+  }
+
+  void resetChecklistIdAndName() {
+    currentCheckListId = null;
+    currentCheckListName = "";
+    notifyListeners();
+  }
+
+  void updateNote(String content) {
+    note = content;
+    notifyListeners();
+  }
+
+  void updateCurrentCheckListName(String name) {
+    currentCheckListName = name;
+    notifyListeners();
+  }
+
+  void updateCurrentCheckListId(int id) {
+    currentCheckListId = id;
     notifyListeners();
   }
 

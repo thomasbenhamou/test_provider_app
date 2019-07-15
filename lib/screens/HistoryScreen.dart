@@ -15,6 +15,7 @@ class HistoryScreen extends StatelessWidget {
               icon: Icon(Icons.home),
               onPressed: () {
                 checks.unCheckAll();
+                checks.resetChecklistIdAndName();
                 Navigator.of(context).pushReplacementNamed('/');
               })),
       body: Container(

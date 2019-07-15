@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:test_provider_app/db/ChecklistModel.dart';
 import 'package:test_provider_app/db/CheckModel.dart';
+import 'package:test_provider_app/db/NoteModel.dart';
 
 class DBProvider {
   DBProvider._();
@@ -37,36 +38,63 @@ class DBProvider {
               "checklistid INTEGER,"
               "FOREIGN KEY(checklistid) REFERENCES Checklist(id)"
               ")");
+          await db.execute("CREATE TABLE Notes ("
+              "id INTEGER PRIMARY KEY,"
+              "content TEXT,"
+              "checklistid INTEGER,"
+              "FOREIGN KEY(checklistid) REFERENCES Checklist(id)"
+              ")");
         });
+  }
+
+  saveNote(Note note) async {
+    final db = await database;
+//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Notes");
+//    int id = table.first["id"];
+//    print("selected id : " + id.toString());
+    var raw = await db.rawInsert(
+        "INSERT Into Notes (content,checklistid)"
+            " VALUES (?,?)",
+        [note.content, note.checklistid]);
+    print("inserted notes in db : " + note.content + "listId : " + raw.toString());
+    return raw;
   }
 
   saveChecklist(Checklist checklist) async {
     final db = await database;
-    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checklist");
-    int id = table.first["id"];
-    print("selected id : " + id.toString());
+//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checklist");
+//    int id = table.first["id"];
+//    print("selected id : " + id.toString());
     var raw = await db.rawInsert(
-        "INSERT Into Checklist (id,name)"
-            " VALUES (?,?)",
-        [id, checklist.name]);
+        "INSERT Into Checklist (name)"
+            " VALUES (?)",
+        [checklist.name]);
     print("inserted row in db : " + raw.toString());
     return raw;
   }
-
+  
+  updateChecklist(String name, int id) async {
+    final db = await database;
+    Checklist c = new Checklist();
+    c.id = id;
+    c.name = name;
+    await db.update("Checklist", c.toJson(), where: "id = ?", whereArgs: [c.id]);
+  }
   saveCheck(Check check) async {
     final db = await database;
-    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checks");
-    int id = table.first["id"];
-    print("selected id : " + id.toString());
+//    db.insert("Checks", check.toJson());
+//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checks");
+//    int id = table.first["id"];
+//    print("selected id : " + id.toString());
     var raw = await db.rawInsert(
-        "INSERT Into Checks (id,category, nb, state, checklistid)"
-            " VALUES (?,?,?,?,?)",
-        [id, check.category, check.nb, check.state ? 1 : 0, check.checklistid]);
-    print("inserted row in db : " + raw.toString());
+        "INSERT Into Checks (category, nb, state, checklistid)"
+            " VALUES (?,?,?,?)",
+        [check.category, check.nb, check.state ? 1 : 0, check.checklistid]);
+    print("inserted check in db : " + raw.toString());
     return raw;
   }
 
-  getChecklist(int id) async {
+  Future<Checklist> getChecklist(int id) async {
     final db = await database;
     var res = await db.query("Checklist", where: "id = ?", whereArgs: [id]);
     return res.isNotEmpty ? Checklist.fromJson(res.first) : null;
@@ -78,6 +106,8 @@ class DBProvider {
     return res.isNotEmpty ? Check.fromJson(res.first) : null;
   }
 
+
+
   Future<List> getAllChecklists() async {
     var db = await database;
     var result = await db.query("Checklist", columns: ["id", "name"]);
@@ -86,6 +116,8 @@ class DBProvider {
 
   deleteChecklist(int id) async {
     var db = await database;
+    db.delete("Notes", where: "checklistid = ?", whereArgs: [id]);
+    db.delete("Checks", where: "checklistid = ?", whereArgs: [id]);
     db.delete("Checklist", where: "id = ?", whereArgs: [id]);
   }
 
@@ -101,10 +133,22 @@ class DBProvider {
     var result = await db.query("Checks", where: "checklistid = ?", whereArgs: [checklistid]);
     result.forEach( (jsonCheck) {
       Check c = Check.fromJson(jsonCheck);
-      print(c.state);
+      print("db : " + c.state.toString());
       items.add(c);
     });
     return items;
+  }
+
+  Future<String> getNote(int checklistid) async {
+    final db = await database;
+    List<String> notes = new List();
+    var res = await db.query("Notes", where: "checklistid = ?", whereArgs: [checklistid]);
+    res.forEach( (jsonNote) {
+      Note n = Note.fromJson(jsonNote);
+      print("db : " + n.content);
+      notes.add(n.content);
+    });
+    return notes.isEmpty ? null : notes.first;
   }
 
 

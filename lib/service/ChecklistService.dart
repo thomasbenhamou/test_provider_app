@@ -10,15 +10,25 @@ class ChecklistService {
 
   static final ChecklistService svc = ChecklistService._();
 
+  updateChecklist(String name, int id) async {
+    await DBProvider.db.updateChecklist(name, id);
+  }
+
+  /**
+   * Save a checklist in the DB
+   */
   Future<int> saveChecklist(String name) async {
     Checklist checklist2 = new Checklist();
     checklist2.setName(name);
     int savedId = await DBProvider.db.saveChecklist(checklist2);
     Checklist saved = await DBProvider.db.getChecklist(savedId);
-    print("saved checklist : " + saved.name);
+    print("saved checklist : " + saved.id.toString());
     return savedId;
   }
 
+  /**
+   * Save all checks in the DB
+   */
   saveChecks(String category, Map<int, bool> checks, int checkListId) async {
     checks.forEach((nb, state) async {
         Check check = new Check();
@@ -32,11 +42,14 @@ class ChecklistService {
 
   confirmReset(BuildContext context) {
 
-    var checks = Provider.of<ChecksModel>(context);
+    BuildContext overallContext = context;
+
+    var checks = Provider.of<ChecksModel>(overallContext);
 
     if (checks.isPristine == true) {
-      checks.unCheckAll();
-      Navigator.of(context).popAndPushNamed('/checklistHome');
+      resetCurrentCheckListData(checks);
+      Navigator.of(overallContext).popAndPushNamed('/checklistHome');
+
     } else {
       return showDialog<void>(
         context: context,
@@ -54,7 +67,7 @@ class ChecklistService {
               FlatButton(
                 child: Text('Ok'),
                 onPressed: () {
-                  checks.unCheckAll();
+                  resetCurrentCheckListData(checks);
                   Navigator.of(context).popAndPushNamed('/checklistHome');
                 },
               ),
@@ -64,6 +77,11 @@ class ChecklistService {
       );
     }
 
+  }
+
+  void resetCurrentCheckListData(ChecksModel checks) {
+    checks.unCheckAll();
+    checks.resetChecklistIdAndName();
   }
 
 

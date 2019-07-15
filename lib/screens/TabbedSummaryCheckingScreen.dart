@@ -9,17 +9,34 @@ import 'package:test_provider_app/db/DatabaseProvider.dart';
 
 class TabbedSummaryCheckingScreen extends StatelessWidget {
 
+  /**
+   * fields and constructor
+   */
   int checkListId;
-
-  TabbedSummaryCheckingScreen({this.checkListId});
+  String checkListName;
+  TabbedSummaryCheckingScreen({this.checkListId, this.checkListName});
 
   @override
   Widget build(BuildContext context) {
 
+    /**
+     * checkListId and checkListName are passed by the HistoryScreen
+     * at build time
+     */
     if (checkListId != null) {
 
       var checks = Provider.of<ChecksModel>(context);
 
+      /**
+       * we update the state using data passed by the HistoryScreen
+       */
+      // TODO : il faut peut être faire tout ça en dehors du build()
+      checks.updateCurrentCheckListId(checkListId);
+      checks.updateCurrentCheckListName(checkListName);
+
+      /**
+       * we update the state using DB data
+       */
       DBProvider.db.getAllChecksForAChecklistId(checkListId).then( (listCheck) {
         listCheck.forEach( (check) {
           if (check.category == "interior") {
@@ -53,9 +70,22 @@ class TabbedSummaryCheckingScreen extends StatelessWidget {
         });
       });
 
+      /**
+       * Retrieve DB data for the note
+       */
+      DBProvider.db.getNote(checkListId).then((noteContent){
+      checks.updateNote(noteContent.toString());
+    });
+
+
+      // TODO : looks like it's a stateful widget ??
       checkListId = null;
+
     }
 
+    /**
+     * Building the layout
+     */
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
@@ -95,7 +125,7 @@ class TabbedSummaryCheckingScreen extends StatelessWidget {
   }
 }
 
-class MainCheckingScreen extends StatelessWidget {
+/*class MainCheckingScreen extends StatelessWidget {
   const MainCheckingScreen({
     Key key,
   }) : super(key: key);
@@ -167,4 +197,4 @@ class MainCheckingScreen extends StatelessWidget {
       ],
     ));
   }
-}
+}*/

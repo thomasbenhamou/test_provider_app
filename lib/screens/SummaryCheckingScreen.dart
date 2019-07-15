@@ -7,6 +7,7 @@ class SummaryCheckingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -79,14 +80,65 @@ class SummaryCheckingScreen extends StatelessWidget {
             ),
           ),
           Center(
-            child: FlatButton.icon(
-              icon: Icon(Icons.edit),
-              onPressed: null,
-              label: Text("Ajouter une note"),
+            child: newNoteTextField(context),
             ),
-          )
         ],
       )),
     );
   }
+
+  newNoteTextField(BuildContext context) {
+
+    return Consumer<ChecksModel>(
+        builder: (context, checks, child) {
+          return TextField(
+            autofocus: true,
+            minLines: 5,
+            maxLines: 5,
+            controller: TextEditingController(text: checks.note),
+            onChanged: (content) {
+              checks.updateNote(content);
+            },
+          );
+        });
+  }
+/*  newNoteDialog(BuildContext context) {
+
+    var checks = Provider.of<ChecksModel>(context);
+
+    final myController = TextEditingController();
+
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Nouvelle note'),
+            content: TextField(
+              autofocus: true,
+              minLines: 5,
+              maxLines: 5,
+              controller: myController,
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Annuler'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('Enregistrer'),
+                onPressed: () {
+                  checks.note = myController.text;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }*/
+
 }
+
+

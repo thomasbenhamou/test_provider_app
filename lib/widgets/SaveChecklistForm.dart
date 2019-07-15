@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/service/ChecklistService.dart';
+import 'package:test_provider_app/service/NoteService.dart';
+import 'package:test_provider_app/db/ChecklistModel.dart';
 
 class SaveChecklistForm extends StatefulWidget {
   @override
@@ -11,7 +13,8 @@ class SaveChecklistForm extends StatefulWidget {
 }
 
 class _FormState extends State<SaveChecklistForm> {
-  final myController = TextEditingController();
+  var myController = TextEditingController();
+
   bool isSaving = false;
   bool isSaveDone = false;
 
@@ -20,17 +23,30 @@ class _FormState extends State<SaveChecklistForm> {
       isSaving = true;
     });
 
-    int checkListId = await ChecklistService.svc.saveChecklist(myController.text);
+    int checkListId;
 
-    Map<int, bool> interior = Provider.of<ChecksModel>(context).interior;
-    Map<int, bool> exterior = Provider.of<ChecksModel>(context).exterior;
-    Map<int, bool> engine = Provider.of<ChecksModel>(context).engine;
-    Map<int, bool> papers = Provider.of<ChecksModel>(context).papers;
+    var checks = Provider.of<ChecksModel>(context);
+
+    if (Provider.of<ChecksModel>(context).currentCheckListId != null) {
+      await ChecklistService.svc.updateChecklist(
+          checks.currentCheckListName, checks.currentCheckListId);
+    } else {
+      checkListId =
+          await ChecklistService.svc.saveChecklist(checks.currentCheckListName);
+    }
+
+    Map<int, bool> interior = checks.interior;
+    Map<int, bool> exterior = checks.exterior;
+    Map<int, bool> engine = checks.engine;
+    Map<int, bool> papers = checks.papers;
 
     ChecklistService.svc.saveChecks("interior", interior, checkListId);
     ChecklistService.svc.saveChecks("exterior", exterior, checkListId);
     ChecklistService.svc.saveChecks("engine", engine, checkListId);
     ChecklistService.svc.saveChecks("papers", papers, checkListId);
+
+    var note = checks.note;
+    NoteService.svc.saveNote(note, checkListId);
 
     setState(() {
       isSaving = false;
@@ -56,21 +72,31 @@ class _FormState extends State<SaveChecklistForm> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var checks = Provider.of<ChecksModel>(context);
+
     return Column(
       children: <Widget>[
-        TextField(
-          maxLength: 20,
-          decoration: InputDecoration(
-              border: InputBorder.none, hintText: 'Ma checklist'),
-          controller: myController,
-        ),
+        Consumer<ChecksModel>(builder: (context, checks, child) {
+          return TextField(
+            autofocus: true,
+            maxLength: 20,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Ma checklist',
+            ),
+            controller:
+                TextEditingController(text: checks.currentCheckListName),
+            onChanged: (content) {
+              checks.updateCurrentCheckListName(content);
+            },
+          );
+        }),
         FlatButton.icon(
             onPressed: _saveToDb,
             icon: isSaving
@@ -81,5 +107,3 @@ class _FormState extends State<SaveChecklistForm> {
     );
   }
 }
-
-
