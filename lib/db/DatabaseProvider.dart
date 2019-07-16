@@ -49,9 +49,6 @@ class DBProvider {
 
   saveNote(Note note) async {
     final db = await database;
-//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Notes");
-//    int id = table.first["id"];
-//    print("selected id : " + id.toString());
     var raw = await db.rawInsert(
         "INSERT Into Notes (content,checklistid)"
             " VALUES (?,?)",
@@ -62,9 +59,6 @@ class DBProvider {
 
   saveChecklist(Checklist checklist) async {
     final db = await database;
-//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checklist");
-//    int id = table.first["id"];
-//    print("selected id : " + id.toString());
     var raw = await db.rawInsert(
         "INSERT Into Checklist (name)"
             " VALUES (?)",
@@ -80,12 +74,20 @@ class DBProvider {
     c.name = name;
     await db.update("Checklist", c.toJson(), where: "id = ?", whereArgs: [c.id]);
   }
+
+  updateCheck(Check c) async {
+    final db = await database;
+    await db.update("Checks", {"state": c.state ? 1 : 0} , where: "checklistid = ? AND category =? AND nb = ?", whereArgs: [c.checklistid, c.category, c.nb]);
+  }
+
+  updateNote(Note n) async {
+    final db = await database;
+    await db.update("Notes", {"content": n.content}, where: "checklistid = ?", whereArgs: [n.checklistid]);
+  }
+
+
   saveCheck(Check check) async {
     final db = await database;
-//    db.insert("Checks", check.toJson());
-//    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Checks");
-//    int id = table.first["id"];
-//    print("selected id : " + id.toString());
     var raw = await db.rawInsert(
         "INSERT Into Checks (category, nb, state, checklistid)"
             " VALUES (?,?,?,?)",

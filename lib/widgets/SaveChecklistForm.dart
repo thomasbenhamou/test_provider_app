@@ -25,28 +25,41 @@ class _FormState extends State<SaveChecklistForm> {
 
     int checkListId;
 
+    /**
+     * Getting the state
+     */
     var checks = Provider.of<ChecksModel>(context);
-
-    if (Provider.of<ChecksModel>(context).currentCheckListId != null) {
-      await ChecklistService.svc.updateChecklist(
-          checks.currentCheckListName, checks.currentCheckListId);
-    } else {
-      checkListId =
-          await ChecklistService.svc.saveChecklist(checks.currentCheckListName);
-    }
-
     Map<int, bool> interior = checks.interior;
     Map<int, bool> exterior = checks.exterior;
     Map<int, bool> engine = checks.engine;
     Map<int, bool> papers = checks.papers;
-
-    ChecklistService.svc.saveChecks("interior", interior, checkListId);
-    ChecklistService.svc.saveChecks("exterior", exterior, checkListId);
-    ChecklistService.svc.saveChecks("engine", engine, checkListId);
-    ChecklistService.svc.saveChecks("papers", papers, checkListId);
-
     var note = checks.note;
-    NoteService.svc.saveNote(note, checkListId);
+
+    /**
+     * Update the state
+     */
+    if (checks.currentCheckListId != null) {
+      ChecklistService.svc.updateChecklist(
+          checks.currentCheckListName, checks.currentCheckListId);
+      ChecklistService.svc.updateChecks("interior", interior, checks.currentCheckListId);
+      ChecklistService.svc.updateChecks("exterior", interior, checks.currentCheckListId);
+      ChecklistService.svc.updateChecks("engine", interior, checks.currentCheckListId);
+      ChecklistService.svc.updateChecks("papers", interior, checks.currentCheckListId);
+      NoteService.svc.updateNote(note, checks.currentCheckListId);
+    } else {
+      /**
+       * Save new list
+       */
+      checkListId =
+          await ChecklistService.svc.saveChecklist(checks.currentCheckListName);
+      ChecklistService.svc.saveChecks("interior", interior, checkListId);
+      ChecklistService.svc.saveChecks("exterior", exterior, checkListId);
+      ChecklistService.svc.saveChecks("engine", engine, checkListId);
+      ChecklistService.svc.saveChecks("papers", papers, checkListId);
+      NoteService.svc.saveNote(note, checkListId);
+    }
+
+
 
     setState(() {
       isSaving = false;

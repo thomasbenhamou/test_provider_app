@@ -3,6 +3,8 @@ import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/db/ChecklistModel.dart';
 import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
 import 'package:test_provider_app/service/ChecklistService.dart';
+import 'package:test_provider_app/model/ChecksModel.dart';
+import 'package:provider/provider.dart';
 
 class ListViewHistory extends StatefulWidget {
   @override
@@ -27,7 +29,11 @@ class _ListViewHistoryState extends State<ListViewHistory> {
 
   @override
   Widget build(BuildContext context) {
+
+    var checks = Provider.of<ChecksModel>(context);
+
     if (items.length == 0) {
+
       return Container(
         child: Center(child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -46,6 +52,7 @@ class _ListViewHistoryState extends State<ListViewHistory> {
         )),
       );
     } else {
+
       return ListView.builder(
           itemCount: items.length,
           padding: EdgeInsets.all(15.0),
@@ -67,10 +74,11 @@ class _ListViewHistoryState extends State<ListViewHistory> {
               },
               child: InkWell(
                 onTap: () {
+                  loadListToContext(checks, position);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TabbedSummaryCheckingScreen(checkListId: items[position].id, checkListName: items[position].name),
+                      builder: (context) => TabbedSummaryCheckingScreen(),
                     ),
                   );
                 },
@@ -84,6 +92,53 @@ class _ListViewHistoryState extends State<ListViewHistory> {
             );
           });
     }
+  }
+
+  void loadListToContext(ChecksModel checks, int position) {
+    checks.updateCurrentCheckListId(items[position].id);
+    checks.updateCurrentCheckListName(items[position].name);
+     /**
+      * we update the provider using DB data
+      */
+     DBProvider.db.getAllChecksForAChecklistId(checks.currentCheckListId).then( (listCheck) {
+       listCheck.forEach( (check) {
+         if (check.category == "interior") {
+           if (check.state) {
+             checks.checkInterior(check.nb);
+           } else {
+             checks.unCheckInterior(check.nb);
+           }
+         }
+         if (check.category == "exterior") {
+           if (check.state) {
+             checks.checkExterior(check.nb);
+           } else {
+             checks.unCheckExterior(check.nb);
+           }
+         }
+         if (check.category == "engine") {
+           if (check.state) {
+             checks.checkEngine(check.nb);
+           } else {
+             checks.unCheckEngine(check.nb);
+           }
+         }
+         if (check.category == "papers") {
+           if (check.state) {
+             checks.checkPapers(check.nb);
+           } else {
+             checks.unCheckPapers(check.nb);
+           }
+         }
+       });
+     });
+
+     /**
+      * Retrieve DB data for the note
+      */
+     DBProvider.db.getNote(checks.currentCheckListId).then((noteContent){
+       checks.updateNote(noteContent.toString());
+     });
   }
 
 }

@@ -7,81 +7,18 @@ import 'EngineDetailCheckingScreen.dart';
 import 'PapersDetailCheckingScreen.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 
-class TabbedSummaryCheckingScreen extends StatelessWidget {
+class TabbedSummaryCheckingScreen extends StatefulWidget {
 
-  /**
-   * fields and constructor
-   */
-  int checkListId;
-  String checkListName;
-  TabbedSummaryCheckingScreen({this.checkListId, this.checkListName});
+  TabbedSummaryCheckingScreen();
+
+  @override
+  _TabbedSummaryCheckingScreenState createState() => _TabbedSummaryCheckingScreenState();
+}
+
+class _TabbedSummaryCheckingScreenState extends State<TabbedSummaryCheckingScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    /**
-     * checkListId and checkListName are passed by the HistoryScreen
-     * at build time
-     */
-    if (checkListId != null) {
-
-      var checks = Provider.of<ChecksModel>(context);
-
-      /**
-       * we update the state using data passed by the HistoryScreen
-       */
-      // TODO : il faut peut être faire tout ça en dehors du build()
-      checks.updateCurrentCheckListId(checkListId);
-      checks.updateCurrentCheckListName(checkListName);
-
-      /**
-       * we update the state using DB data
-       */
-      DBProvider.db.getAllChecksForAChecklistId(checkListId).then( (listCheck) {
-        listCheck.forEach( (check) {
-          if (check.category == "interior") {
-            if (check.state) {
-              checks.checkInterior(check.nb);
-            } else {
-              checks.unCheckInterior(check.nb);
-            }
-          }
-          if (check.category == "exterior") {
-            if (check.state) {
-              checks.checkExterior(check.nb);
-            } else {
-              checks.unCheckExterior(check.nb);
-            }
-          }
-          if (check.category == "engine") {
-            if (check.state) {
-              checks.checkEngine(check.nb);
-            } else {
-              checks.unCheckEngine(check.nb);
-            }
-          }
-          if (check.category == "papers") {
-            if (check.state) {
-              checks.checkPapers(check.nb);
-            } else {
-              checks.unCheckPapers(check.nb);
-            }
-          }
-        });
-      });
-
-      /**
-       * Retrieve DB data for the note
-       */
-      DBProvider.db.getNote(checkListId).then((noteContent){
-      checks.updateNote(noteContent.toString());
-    });
-
-
-      // TODO : looks like it's a stateful widget ??
-      checkListId = null;
-
-    }
 
     /**
      * Building the layout
@@ -123,6 +60,7 @@ class TabbedSummaryCheckingScreen extends StatelessWidget {
       ),
     );
   }
+
 }
 
 /*class MainCheckingScreen extends StatelessWidget {

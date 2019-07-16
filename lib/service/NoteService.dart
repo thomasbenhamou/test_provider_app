@@ -17,4 +17,12 @@ class NoteService {
     print("saved note with id : " + savedId.toString());
     return savedId;
   }
+
+  updateNote(String content, int checkListId) async {
+    Note note = new Note();
+    note.content = content;
+    note.checklistid = checkListId;
+    DBProvider.db.updateNote(note);
+  }
+
 }

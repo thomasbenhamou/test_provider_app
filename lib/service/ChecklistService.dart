@@ -10,17 +10,22 @@ class ChecklistService {
 
   static final ChecklistService svc = ChecklistService._();
 
-  updateChecklist(String name, int id) async {
-    await DBProvider.db.updateChecklist(name, id);
+  updateChecklist(String name, int id) {
+    DBProvider.db.updateChecklist(name, id);
   }
 
   /**
    * Save a checklist in the DB
    */
   Future<int> saveChecklist(String name) async {
-    Checklist checklist2 = new Checklist();
-    checklist2.setName(name);
-    int savedId = await DBProvider.db.saveChecklist(checklist2);
+    Checklist c = new Checklist();
+    if (name != null && name.isNotEmpty) {
+      c.setName(name);
+    } else {
+      c.setName("Ma checkliste");
+    }
+
+    int savedId = await DBProvider.db.saveChecklist(c);
     Checklist saved = await DBProvider.db.getChecklist(savedId);
     print("saved checklist : " + saved.id.toString());
     return savedId;
@@ -37,6 +42,17 @@ class ChecklistService {
         check.state = state;
         check.checklistid = checkListId;
         await DBProvider.db.saveCheck(check);
+    });
+  }
+
+  updateChecks(String category, Map<int, bool> checks, int checkListId) async {
+    checks.forEach((nb, state) async {
+      Check updatedCheck = new Check();
+      updatedCheck.category = category;
+      updatedCheck.nb = nb;
+      updatedCheck.state = state;
+      updatedCheck.checklistid = checkListId;
+      await DBProvider.db.updateCheck(updatedCheck);
     });
   }
 
