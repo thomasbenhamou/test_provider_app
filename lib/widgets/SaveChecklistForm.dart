@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
-import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/service/ChecklistService.dart';
 import 'package:test_provider_app/service/NoteService.dart';
-import 'package:test_provider_app/db/ChecklistModel.dart';
 
 class SaveChecklistForm extends StatefulWidget {
   @override
@@ -25,9 +23,7 @@ class _FormState extends State<SaveChecklistForm> {
 
     int checkListId;
 
-    /**
-     * Getting the state
-     */
+    // Getting the state
     var checks = Provider.of<ChecksModel>(context);
     Map<int, bool> interior = checks.interior;
     Map<int, bool> exterior = checks.exterior;
@@ -35,21 +31,21 @@ class _FormState extends State<SaveChecklistForm> {
     Map<int, bool> papers = checks.papers;
     var note = checks.note;
 
-    /**
-     * Update the state
-     */
+    //Update the state
     if (checks.currentCheckListId != null) {
       ChecklistService.svc.updateChecklist(
           checks.currentCheckListName, checks.currentCheckListId);
-      ChecklistService.svc.updateChecks("interior", interior, checks.currentCheckListId);
-      ChecklistService.svc.updateChecks("exterior", interior, checks.currentCheckListId);
-      ChecklistService.svc.updateChecks("engine", interior, checks.currentCheckListId);
-      ChecklistService.svc.updateChecks("papers", interior, checks.currentCheckListId);
+      ChecklistService.svc
+          .updateChecks("interior", interior, checks.currentCheckListId);
+      ChecklistService.svc
+          .updateChecks("exterior", interior, checks.currentCheckListId);
+      ChecklistService.svc
+          .updateChecks("engine", interior, checks.currentCheckListId);
+      ChecklistService.svc
+          .updateChecks("papers", interior, checks.currentCheckListId);
       NoteService.svc.updateNote(note, checks.currentCheckListId);
     } else {
-      /**
-       * Save new list
-       */
+      // Save new list
       checkListId =
           await ChecklistService.svc.saveChecklist(checks.currentCheckListName);
       ChecklistService.svc.saveChecks("interior", interior, checkListId);
@@ -58,8 +54,6 @@ class _FormState extends State<SaveChecklistForm> {
       ChecklistService.svc.saveChecks("papers", papers, checkListId);
       NoteService.svc.saveNote(note, checkListId);
     }
-
-
 
     setState(() {
       isSaving = false;
@@ -91,8 +85,6 @@ class _FormState extends State<SaveChecklistForm> {
 
   @override
   Widget build(BuildContext context) {
-    var checks = Provider.of<ChecksModel>(context);
-
     return Column(
       children: <Widget>[
         Consumer<ChecksModel>(builder: (context, checks, child) {

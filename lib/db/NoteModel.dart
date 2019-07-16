@@ -16,14 +16,14 @@ class Note {
   });
 
   factory Note.fromJson(Map<String, dynamic> json) => new Note(
-    id: json["id"],
-    content: json["content"],
-    checklistid: json["checklistid"],
-  );
+        id: json["id"],
+        content: json["content"],
+        checklistid: json["checklistid"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "content": content,
-    "checklistid": checklistid,
-  };
+        "id": id,
+        "content": content,
+        "checklistid": checklistid,
+      };
 }

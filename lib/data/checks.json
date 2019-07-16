@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "category": "interior",
+      "nb": 1,
+      "image": "assets/image1.jpg",
+      "description": "The check description"
+    },
+    {
+      "category": "interior",
+      "nb": 2,
+      "image": "assets/image1.jpg",
+      "description": "The check description"
+    },
+    {
+      "category": "engine",
+      "nb": 1,
+      "image": "assets/image1.jpg",
+      "description": "The check description"
+    },
+    {
+      "category": "exterior",
+      "nb": 1,
+      "image": "assets/image1.jpg",
+      "description": "The check description"
+    },
+    {
+      "category": "papers",
+      "nb": 1,
+      "image": "assets/image1.jpg",
+      "description": "The check description"
+    }
+  ]
+}

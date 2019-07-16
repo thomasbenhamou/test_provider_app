@@ -23,18 +23,19 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         initialRoute: '/',
         routes: {
-        '/checklistHome': (context) => TabbedSummaryCheckingScreen(),
-          '/checklistSummary' : (context) => SummaryCheckingScreen(),
+          '/checklistHome': (context) => TabbedSummaryCheckingScreen(),
+          '/checklistSummary': (context) => SummaryCheckingScreen(),
           '/': (context) => HomeScreen(),
-        '/detailCheckingInterior': (context) => InteriorDetailCheckingScreen(),
-          '/detailCheckingExterior': (context) => ExteriorDetailCheckingScreen(),
+          '/detailCheckingInterior': (context) =>
+              InteriorDetailCheckingScreen(),
+          '/detailCheckingExterior': (context) =>
+              ExteriorDetailCheckingScreen(),
           '/detailCheckingPapers': (context) => PapersDetailCheckingScreen(),
           '/detailCheckingEngine': (context) => EngineDetailCheckingScreen(),
           '/history': (context) => HistoryScreen(),
           '/saveChecklist': (context) => SaveChecklistScreen(),
-      },
+        },
       ),
     );
   }
 }
-

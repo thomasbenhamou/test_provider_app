@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 
 class EngineDetailCheckingScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     var checks = Provider.of<ChecksModel>(context);
@@ -20,21 +19,20 @@ class EngineDetailCheckingScreen extends StatelessWidget {
     bool is2Checked = checks.isCheckedEngine(2);
 
     return Container(
-        child: Column(
-          children: <Widget>[
-            IconButton(
-                icon: is1Checked
-                    ? Icon(Icons.check_box)
-                    : Icon(Icons.check_box_outline_blank),
-                onPressed: () => handleOnPress(1)),
-            IconButton(
-                icon: is2Checked
-                    ? Icon(Icons.check_box)
-                    : Icon(Icons.check_box_outline_blank),
-                onPressed: () => handleOnPress(2)),
-          ],
-        ),
-      );
+      child: Column(
+        children: <Widget>[
+          IconButton(
+              icon: is1Checked
+                  ? Icon(Icons.check_box)
+                  : Icon(Icons.check_box_outline_blank),
+              onPressed: () => handleOnPress(1)),
+          IconButton(
+              icon: is2Checked
+                  ? Icon(Icons.check_box)
+                  : Icon(Icons.check_box_outline_blank),
+              onPressed: () => handleOnPress(2)),
+        ],
+      ),
+    );
   }
-  
 }

@@ -14,9 +14,7 @@ class ChecklistService {
     DBProvider.db.updateChecklist(name, id);
   }
 
-  /**
-   * Save a checklist in the DB
-   */
+  /// Save a checklist in the DB
   Future<int> saveChecklist(String name) async {
     Checklist c = new Checklist();
     if (name != null && name.isNotEmpty) {
@@ -31,17 +29,15 @@ class ChecklistService {
     return savedId;
   }
 
-  /**
-   * Save all checks in the DB
-   */
+  /// Save all checks in the DB
   saveChecks(String category, Map<int, bool> checks, int checkListId) async {
     checks.forEach((nb, state) async {
-        Check check = new Check();
-        check.category = category;
-        check.nb = nb;
-        check.state = state;
-        check.checklistid = checkListId;
-        await DBProvider.db.saveCheck(check);
+      Check check = new Check();
+      check.category = category;
+      check.nb = nb;
+      check.state = state;
+      check.checklistid = checkListId;
+      await DBProvider.db.saveCheck(check);
     });
   }
 
@@ -57,22 +53,21 @@ class ChecklistService {
   }
 
   confirmReset(BuildContext context) {
-
     BuildContext overallContext = context;
 
     var checks = Provider.of<ChecksModel>(overallContext);
 
     if (checks.isPristine == true) {
       resetCurrentCheckListData(checks);
-      Navigator.of(overallContext).popAndPushNamed('/checklistHome');
-
+      Navigator.of(overallContext).pushReplacementNamed('/checklistHome');
     } else {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Attention'),
-            content: const Text('Créer une nouvelle liste va supprimer les données existantes.'),
+            content: const Text(
+                'Créer une nouvelle liste va supprimer les données existantes.'),
             actions: <Widget>[
               FlatButton(
                 child: Text('Annuler'),
@@ -92,13 +87,10 @@ class ChecklistService {
         },
       );
     }
-
   }
 
   void resetCurrentCheckListData(ChecksModel checks) {
     checks.unCheckAll();
     checks.resetChecklistIdAndName();
   }
-
-
 }

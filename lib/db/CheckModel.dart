@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 Check checkFromJson(String str) => Check.fromJson(json.decode(str));
@@ -21,18 +20,18 @@ class Check {
   });
 
   factory Check.fromJson(Map<String, dynamic> json) => new Check(
-    id: json["id"],
-    category: json["category"],
-    nb: json["nb"],
-    state: json["state"] == 0 ? false : true,
-    checklistid: json["checklistid"],
-  );
+        id: json["id"],
+        category: json["category"],
+        nb: json["nb"],
+        state: json["state"] == 0 ? false : true,
+        checklistid: json["checklistid"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "category": category,
-    "nb": nb,
-    "state": state,
-    "checklistid": checklistid,
-  };
+        "id": id,
+        "category": category,
+        "nb": nb,
+        "state": state,
+        "checklistid": checklistid,
+      };
 }

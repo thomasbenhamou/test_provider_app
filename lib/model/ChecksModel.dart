@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ChecksModel extends ChangeNotifier {
-
+  ///Initial state
   Map<int, bool> interior = {1: false, 2: false, 3: false};
   Map<int, bool> exterior = {1: false, 2: false, 3: false};
   Map<int, bool> papers = {1: false, 2: false, 3: false};
   Map<int, bool> engine = {1: false, 2: false, 3: false};
 
   bool isPristine = true;
-
   int currentCheckListId;
   String currentCheckListName = "";
-
   String note = "";
 
   void unCheckAll() {
@@ -67,7 +65,8 @@ class ChecksModel extends ChangeNotifier {
 
   int getNbCheckedInterior() {
     int nbChecked = 0;
-    interior.forEach( (k, v) => v ? nbChecked = nbChecked +1 : nbChecked = nbChecked);
+    interior.forEach(
+        (k, v) => v ? nbChecked = nbChecked + 1 : nbChecked = nbChecked);
     return nbChecked;
   }
 
@@ -89,7 +88,8 @@ class ChecksModel extends ChangeNotifier {
 
   int getNbCheckedExterior() {
     int nbChecked = 0;
-    exterior.forEach( (k, v) => v ? nbChecked = nbChecked +1 : nbChecked = nbChecked);
+    exterior.forEach(
+        (k, v) => v ? nbChecked = nbChecked + 1 : nbChecked = nbChecked);
     return nbChecked;
   }
 
@@ -111,7 +111,8 @@ class ChecksModel extends ChangeNotifier {
 
   int getNbCheckedPapers() {
     int nbChecked = 0;
-    papers.forEach( (k, v) => v ? nbChecked = nbChecked +1 : nbChecked = nbChecked);
+    papers.forEach(
+        (k, v) => v ? nbChecked = nbChecked + 1 : nbChecked = nbChecked);
     return nbChecked;
   }
 
@@ -133,7 +134,8 @@ class ChecksModel extends ChangeNotifier {
 
   int getNbCheckedEngine() {
     int nbChecked = 0;
-    engine.forEach( (k, v) => v ? nbChecked = nbChecked +1 : nbChecked = nbChecked);
+    engine.forEach(
+        (k, v) => v ? nbChecked = nbChecked + 1 : nbChecked = nbChecked);
     return nbChecked;
   }
 

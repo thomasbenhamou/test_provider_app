@@ -1,8 +1,5 @@
 import 'package:test_provider_app/db/NoteModel.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
-import 'package:flutter/material.dart';
-import 'package:test_provider_app/model/ChecksModel.dart';
-import 'package:provider/provider.dart';
 
 class NoteService {
   NoteService._();
@@ -24,5 +21,4 @@ class NoteService {
     note.checklistid = checkListId;
     DBProvider.db.updateNote(note);
   }
-
 }
