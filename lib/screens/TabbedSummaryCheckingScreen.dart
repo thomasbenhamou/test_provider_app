@@ -3,6 +3,7 @@ import 'InteriorDetailCheckingScreen.dart';
 import 'ExteriorDetailCheckingScreen.dart';
 import 'EngineDetailCheckingScreen.dart';
 import 'PapersDetailCheckingScreen.dart';
+import 'package:test_provider_app/model/ChecksData.dart';
 
 class TabbedSummaryCheckingScreen extends StatefulWidget {
   TabbedSummaryCheckingScreen();
@@ -14,6 +15,14 @@ class TabbedSummaryCheckingScreen extends StatefulWidget {
 
 class _TabbedSummaryCheckingScreenState
     extends State<TabbedSummaryCheckingScreen> {
+
+  ChecksData checksData = new ChecksData();
+
+  @override
+  void initState() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
