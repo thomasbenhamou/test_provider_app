@@ -11,7 +11,7 @@ class CheckioBannerTitle extends StatelessWidget {
           CheckioBanner(),
           RichText(
               text: TextSpan(
-                  text: "Che",
+                  text: "che",
                   style: Theme.of(context).textTheme.title,
                   children: <TextSpan>[
                 TextSpan(text: 'ck', style: Theme.of(context).textTheme.headline),
