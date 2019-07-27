@@ -10,6 +10,7 @@ import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
 import 'package:test_provider_app/screens/HomeScreen.dart';
 import 'package:test_provider_app/screens/HistoryScreen.dart';
 import 'screens/SaveChecklistScreen.dart';
+import 'package:test_provider_app/ui/theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       builder: (context) => ChecksModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Checkio',
+        theme: CheckioThemeData,
         initialRoute: '/',
         routes: {
           '/checklistHome': (context) => TabbedSummaryCheckingScreen(),

@@ -6,6 +6,7 @@ import 'package:test_provider_app/model/ChecksData.dart';
 class InteriorDetailCheckingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     var checks = Provider.of<ChecksModel>(context);
 
     void handleOnPress(int checkNb) {
