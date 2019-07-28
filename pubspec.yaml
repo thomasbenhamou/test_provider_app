@@ -23,6 +23,7 @@ dependencies:
   provider: ^2.0.0
   sqflite: ^1.1.6+1
   path_provider: ^1.1.0
+  flutter_icons: ^0.1.4
 
 dev_dependencies:
   flutter_test:
@@ -49,5 +50,6 @@ flutter:
           weight: 400
     - family: Montserrat
       fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
         - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
           weight: 700

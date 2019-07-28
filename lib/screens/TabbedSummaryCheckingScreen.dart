@@ -4,6 +4,7 @@ import 'ExteriorDetailCheckingScreen.dart';
 import 'EngineDetailCheckingScreen.dart';
 import 'PapersDetailCheckingScreen.dart';
 import 'package:test_provider_app/model/ChecksData.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class TabbedSummaryCheckingScreen extends StatefulWidget {
   TabbedSummaryCheckingScreen();
@@ -15,13 +16,10 @@ class TabbedSummaryCheckingScreen extends StatefulWidget {
 
 class _TabbedSummaryCheckingScreenState
     extends State<TabbedSummaryCheckingScreen> {
-
   ChecksData checksData = new ChecksData();
 
   @override
-  void initState() {
-
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +29,20 @@ class _TabbedSummaryCheckingScreenState
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
-            FlatButton.icon(
-                icon: Icon(Icons.insert_chart),
-                label: Text("Résumé"),
+            IconButton(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                icon: Icon(
+                  Octicons.getIconData("checklist"),
+                  size: 40,
+                ),
                 onPressed: () =>
                     Navigator.pushNamed(context, '/checklistSummary')),
           ],
           leading: IconButton(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                AntDesign.getIconData("home"),
+                size: 40,
+              ),
               onPressed: () => Navigator.pushNamed(context, "/")),
         ),
         body: TabBarView(
@@ -51,12 +55,17 @@ class _TabbedSummaryCheckingScreenState
         ),
         bottomNavigationBar: SafeArea(
           child: TabBar(
-            labelColor: Colors.black,
             tabs: [
-              Tab(text: "Intérieur", icon: Icon(Icons.directions_car)),
-              Tab(text: "Extérieur", icon: Icon(Icons.directions_transit)),
-              Tab(text: "Moteur", icon: Icon(Icons.directions_bike)),
-              Tab(text: "Papiers", icon: Icon(Icons.satellite)),
+              Tab(
+                  text: "Intérieur",
+                  icon: Icon(MaterialCommunityIcons.getIconData("steering"))),
+              Tab(
+                  text: "Extérieur",
+                  icon: Icon(FontAwesome.getIconData("car"))),
+              Tab(
+                  text: "Moteur",
+                  icon: Icon(MaterialCommunityIcons.getIconData("oil"))),
+              Tab(text: "Papiers", icon: Icon(Entypo.getIconData("documents"))),
             ],
           ),
         ),

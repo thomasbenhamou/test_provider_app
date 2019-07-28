@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_provider_app/ui/CheckioRectTile.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class CheckioBanner extends StatelessWidget {
 
@@ -28,10 +29,10 @@ class CheckioBanner extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CheckioRectTile(icon: Icons.directions_car),
-                  CheckioRectTile(icon: Icons.directions_bike),
-                  CheckioRectTile(icon: Icons.directions_car),
-                  CheckioRectTile(icon: Icons.directions_bike),
+                  CheckioRectTile(icon: MaterialCommunityIcons.getIconData("car-convertible")),
+                  CheckioRectTile(icon: MaterialCommunityIcons.getIconData("car-hatchback")),
+                  CheckioRectTile(icon: MaterialCommunityIcons.getIconData("car-estate")),
+                  CheckioRectTile(icon: MaterialCommunityIcons.getIconData("car-sports")),
                 ],
               ),
             ],

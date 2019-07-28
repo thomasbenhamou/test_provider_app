@@ -4,6 +4,7 @@ import 'package:test_provider_app/screens/InteriorDetailCheckingScreen.dart';
 import 'package:test_provider_app/screens/ExteriorDetailCheckingScreen.dart';
 import 'package:test_provider_app/screens/PapersDetailCheckingScreen.dart';
 import 'package:test_provider_app/screens/EngineDetailCheckingScreen.dart';
+import 'package:test_provider_app/screens/AnalyzeCheckScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           '/detailCheckingEngine': (context) => EngineDetailCheckingScreen(),
           '/history': (context) => HistoryScreen(),
           '/saveChecklist': (context) => SaveChecklistScreen(),
+          '/analyseCheck' : (context) => AnalyzeCheckScreen(),
         },
       ),
     );

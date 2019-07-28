@@ -22,10 +22,27 @@ final ThemeData CheckioThemeData = new ThemeData(
           color: Color.fromRGBO(31, 204, 115, 1),
           fontFamily: "Advent Pro",
           fontSize: 36,
-          fontWeight: FontWeight.w400
+          fontWeight: FontWeight.w700
+      ),
+      body1: TextStyle(
+        color: Colors.grey[850],
+        fontFamily: "Montserrat",
+        fontSize: 18
       )
     ),
     appBarTheme: AppBarTheme(
-    color: Colors.grey[50]
-    )
+    color: Colors.grey[50],
+      actionsIconTheme: IconThemeData(
+        color: Color.fromRGBO(31, 204, 115, 1),
+        size: 30
+      ),
+      iconTheme: IconThemeData(
+        color: Color.fromRGBO(31, 204, 115, 1),
+        size: 30
+      ),
+    ),
+  tabBarTheme: TabBarTheme(
+    labelColor: Color.fromRGBO(31, 204, 115, 1),
+    unselectedLabelColor: Colors.grey[400],
+  )
 );
