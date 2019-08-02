@@ -27,8 +27,36 @@ final ThemeData CheckioThemeData = new ThemeData(
       body1: TextStyle(
         color: Colors.grey[850],
         fontFamily: "Montserrat",
-        fontSize: 18
-      )
+        fontSize: 15
+      ),
+      button: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 20,
+      ),
+      display4: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 12,
+      ),
+      display1: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 33,
+        color: Color.fromRGBO(31, 204, 115, 1),
+      ),
+      overline: TextStyle(
+        fontFamily: "Advent Pro",
+        fontSize: 28,
+      ),
+      caption: TextStyle(
+        fontFamily: "Montserrat",
+        fontWeight: FontWeight.w700,
+        fontSize: 30,
+        color: Colors.grey[300],
+      ),
+      display2: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: 22,
+        color: Colors.orangeAccent,
+      ),
     ),
     appBarTheme: AppBarTheme(
     color: Colors.grey[50],

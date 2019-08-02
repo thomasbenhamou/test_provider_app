@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:test_provider_app/db/DatabaseProvider.dart';
 import 'package:test_provider_app/db/ChecklistModel.dart';
 import 'package:test_provider_app/screens/TabbedSummaryCheckingScreen.dart';
-import 'package:test_provider_app/service/ChecklistService.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:provider/provider.dart';
+import 'package:test_provider_app/ui/NoListDisplay.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class ListViewHistory extends StatefulWidget {
   @override
@@ -28,69 +29,69 @@ class _ListViewHistoryState extends State<ListViewHistory> {
 
   @override
   Widget build(BuildContext context) {
+
     var checks = Provider.of<ChecksModel>(context);
 
+    double width = MediaQuery.of(context).size.width;
+
     if (items.length == 0) {
-      return Container(
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.tag_faces,
-              size: 70,
-              color: Colors.orangeAccent,
-            ),
-            Text("Vous n'avez pas encore créé de checklist :("),
-            FlatButton.icon(
-                padding: EdgeInsets.all(20.0),
-                onPressed: () {
-                  ChecklistService.svc.confirmReset(context);
-                },
-                icon: Icon(Icons.assignment_turned_in),
-                label: Text("Créer une checklist"))
-          ],
-        )),
-      );
+      return new NoListDisplay();
     } else {
-      return ListView.builder(
-          itemCount: items.length,
-          padding: EdgeInsets.all(15.0),
-          itemBuilder: (context, position) {
-            return Dismissible(
-              key: Key(UniqueKey().toString()),
-              direction: DismissDirection.endToStart,
-              background: dismissibleBackground(),
-              onDismissed: (direction) {
-                DBProvider.db.deleteChecklist(items[position].id);
-                setState(() {
-                  items.removeAt(position);
-                });
-                Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text("Supprimé"),
-                  backgroundColor: Colors.orangeAccent,
-                  duration: Duration(milliseconds: 600),
-                ));
-              },
-              child: InkWell(
-                onTap: () {
-                  loadListToContext(checks, position);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TabbedSummaryCheckingScreen(),
-                    ),
-                  );
+      return Container(
+        child: ListView.builder(
+            itemCount: items.length,
+            padding: EdgeInsets.all(15.0),
+            itemBuilder: (context, position) {
+              return Dismissible(
+                key: Key(UniqueKey().toString()),
+                direction: DismissDirection.endToStart,
+                background: dismissibleBackground(),
+                onDismissed: (direction) {
+                  DBProvider.db.deleteChecklist(items[position].id);
+                  setState(() {
+                    items.removeAt(position);
+                  });
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("Supprimé", style: Theme.of(context).textTheme.subhead.apply(
+                      color: Colors.white,
+                    ),textAlign: TextAlign.center,),
+                    backgroundColor: Colors.orangeAccent,
+                    duration: Duration(milliseconds: 600),
+                  ));
                 },
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(items[position].name),
+                child: FlatButton(
+                  highlightColor: Color.fromRGBO(31, 204, 115, 1),
+                  splashColor: Color.fromRGBO(31, 204, 115, 1),
+                  onPressed: () {
+                    loadListToContext(checks, position);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TabbedSummaryCheckingScreen(),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Container(
+                      width: width,
+                      height: 85,
+                      color: Colors.transparent,
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(items[position].name, style: Theme.of(context).textTheme.body1.apply(
+                            fontSizeFactor: 1.3
+                          ),),
+                          Icon(Feather.getIconData("download"), size: 30, color: Colors.grey[400],)
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+      );
     }
   }
 
@@ -141,6 +142,8 @@ class _ListViewHistoryState extends State<ListViewHistory> {
     });
   }
 }
+
+
 
 Widget dismissibleBackground() {
   return Container(

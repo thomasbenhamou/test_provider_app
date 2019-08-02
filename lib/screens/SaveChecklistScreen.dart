@@ -6,7 +6,6 @@ class SaveChecklistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sauvegarder"),
       ),
       body: Container(child: SaveChecklistForm()),
     );

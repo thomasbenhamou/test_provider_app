@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/service/ChecklistService.dart';
 import 'package:test_provider_app/service/NoteService.dart';
+import 'package:test_provider_app/ui/LargeButton.dart';
 
 class SaveChecklistForm extends StatefulWidget {
   @override
@@ -65,11 +66,13 @@ class _FormState extends State<SaveChecklistForm> {
         isSaveDone = false;
       });
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Sauvegardé"),
+        content: Text("Sauvegardé", style: Theme.of(context).textTheme.subhead.apply(
+          color: Colors.white,
+        ), textAlign: TextAlign.center,),
         duration: Duration(milliseconds: 600),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.green,
       ));
-      new Timer(new Duration(milliseconds: 700), returnToSummary);
+      new Timer(new Duration(milliseconds: 1000), returnToSummary);
     }
   }
 
@@ -88,26 +91,29 @@ class _FormState extends State<SaveChecklistForm> {
     return Column(
       children: <Widget>[
         Consumer<ChecksModel>(builder: (context, checks, child) {
-          return TextField(
-            autofocus: true,
-            maxLength: 20,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Ma checklist',
+          return Container(
+            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            padding: EdgeInsets.all(20),
+            child: TextField(
+              style: Theme.of(context).textTheme.button,
+              autofocus: true,
+              maxLength: 20,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Ma checklist',
+              ),
+              controller:
+                  TextEditingController(text: checks.currentCheckListName),
+              onChanged: (content) {
+                checks.updateCurrentCheckListName(content);
+              },
             ),
-            controller:
-                TextEditingController(text: checks.currentCheckListName),
-            onChanged: (content) {
-              checks.updateCurrentCheckListName(content);
-            },
           );
         }),
-        FlatButton.icon(
-            onPressed: _saveToDb,
-            icon: isSaving
-                ? Icon(Icons.cached)
-                : isSaveDone ? Icon(Icons.check) : Icon(Icons.save),
-            label: Text("Enregistrer"))
+        LargeButton(
+          label: "Enregistrer",
+            onPress: _saveToDb,
+            )
       ],
     );
   }

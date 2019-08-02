@@ -12,6 +12,16 @@ class ChecksModel extends ChangeNotifier {
   String currentCheckListName = "";
   String note = "";
 
+  void dirty() {
+    isPristine = false;
+    notifyListeners();
+  }
+
+  void pristine() {
+    isPristine = true;
+    notifyListeners();
+  }
+
   void unCheckAll() {
     interior.forEach((i, state) {
       interior[i] = false;

@@ -19,9 +19,6 @@ class _TabbedSummaryCheckingScreenState
   ChecksData checksData = new ChecksData();
 
   @override
-  void initState() {}
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
@@ -55,17 +52,22 @@ class _TabbedSummaryCheckingScreenState
         ),
         bottomNavigationBar: SafeArea(
           child: TabBar(
+            labelStyle: Theme.of(context).textTheme.display4,
+            indicator: ShapeDecoration(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              color: Color.fromRGBO(200, 200, 200, 0.3)
+            ),
             tabs: [
               Tab(
                   text: "Intérieur",
-                  icon: Icon(MaterialCommunityIcons.getIconData("steering"))),
+                  icon: Icon(MaterialCommunityIcons.getIconData("steering"), size: 35,)),
               Tab(
                   text: "Extérieur",
-                  icon: Icon(FontAwesome.getIconData("car"))),
+                  icon: Icon(FontAwesome.getIconData("car"), size: 35,)),
               Tab(
                   text: "Moteur",
-                  icon: Icon(MaterialCommunityIcons.getIconData("oil"))),
-              Tab(text: "Papiers", icon: Icon(Entypo.getIconData("documents"))),
+                  icon: Icon(MaterialCommunityIcons.getIconData("oil"),size: 35,)),
+              Tab(text: "Papiers", icon: Icon(Entypo.getIconData("documents"),size: 35,)),
             ],
           ),
         ),

@@ -50,8 +50,7 @@ class ContinueButton extends StatelessWidget {
       return LargeButton(
         label: "Continuer ma checkliste",
         onPress: () {
-          // TODO
-          print("todo");
+          Navigator.of(context).pushReplacementNamed('/checklistHome');
         },
       );
     } else {
