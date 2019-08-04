@@ -62,11 +62,11 @@ final ThemeData CheckioThemeData = new ThemeData(
     color: Colors.grey[50],
       actionsIconTheme: IconThemeData(
         color: Color.fromRGBO(31, 204, 115, 1),
-        size: 30
+        size: 25
       ),
       iconTheme: IconThemeData(
         color: Color.fromRGBO(31, 204, 115, 1),
-        size: 30
+        size: 25
       ),
     ),
   tabBarTheme: TabBarTheme(

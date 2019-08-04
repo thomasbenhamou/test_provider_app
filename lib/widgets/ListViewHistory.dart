@@ -29,7 +29,6 @@ class _ListViewHistoryState extends State<ListViewHistory> {
 
   @override
   Widget build(BuildContext context) {
-
     var checks = Provider.of<ChecksModel>(context);
 
     double width = MediaQuery.of(context).size.width;
@@ -52,38 +51,52 @@ class _ListViewHistoryState extends State<ListViewHistory> {
                     items.removeAt(position);
                   });
                   Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Supprimé", style: Theme.of(context).textTheme.subhead.apply(
-                      color: Colors.white,
-                    ),textAlign: TextAlign.center,),
+                    content: Text(
+                      "Supprimé",
+                      style: Theme.of(context).textTheme.subhead.apply(
+                            color: Colors.white,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
                     backgroundColor: Colors.orangeAccent,
                     duration: Duration(milliseconds: 600),
                   ));
                 },
-                child: FlatButton(
-                  highlightColor: Color.fromRGBO(31, 204, 115, 1),
-                  splashColor: Color.fromRGBO(31, 204, 115, 1),
-                  onPressed: () {
-                    loadListToContext(checks, position);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TabbedSummaryCheckingScreen(),
-                      ),
-                    );
-                  },
-                  child: Card(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    splashColor: Color.fromRGBO(31, 204, 115, 1),
+                    highlightColor: Color.fromRGBO(31, 204, 115, 1),
+                    onTap: () {
+                      loadListToContext(checks, position);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TabbedSummaryCheckingScreen(),
+                        ),
+                      );
+                    },
                     child: Container(
-                      width: width,
                       height: 85,
-                      color: Colors.transparent,
                       padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(items[position].name, style: Theme.of(context).textTheme.body1.apply(
-                            fontSizeFactor: 1.3
-                          ),),
-                          Icon(Feather.getIconData("download"), size: 30, color: Colors.grey[400],)
+                          Text(
+                            items[position].name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .body1
+                                .apply(fontSizeFactor: 1.3, color: Colors.grey[600]),
+                          ),
+                          Icon(
+                            Feather.getIconData("download"),
+                            size: 28,
+                            color: Colors.grey[600],
+                          )
                         ],
                       ),
                     ),
@@ -142,8 +155,6 @@ class _ListViewHistoryState extends State<ListViewHistory> {
     });
   }
 }
-
-
 
 Widget dismissibleBackground() {
   return Container(

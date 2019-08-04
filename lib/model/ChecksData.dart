@@ -28,12 +28,14 @@ class Check {
   String category;
   int nb;
   String image;
+  String title;
   String description;
 
   Check({
     this.category,
     this.nb,
     this.image,
+    this.title,
     this.description,
   });
 
@@ -41,6 +43,7 @@ class Check {
     category: json["category"],
     nb: json["nb"],
     image: json["image"],
+    title: json["title"],
     description: json["description"],
   );
 
@@ -48,6 +51,7 @@ class Check {
     "category": category,
     "nb": nb,
     "image": image,
+    "title": title,
     "description": description,
   };
 }

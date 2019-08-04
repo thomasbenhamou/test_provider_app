@@ -17,6 +17,8 @@ class ChecklistItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    double screenWidth = MediaQuery.of(context).size.width;
+
     void handleOnPress(int checkNb) {
       if (checks.isCheckedInterior(checkNb)) {
         checks.unCheckInterior(checkNb);
@@ -48,10 +50,12 @@ class ChecklistItem extends StatelessWidget {
                   onTap: () => showAnalyzeCheckScreen(c),
                   child: Hero(
                       tag: 'checkHero' + c.nb.toString(),
-                      child: Image.asset(c.image, fit: BoxFit.fitWidth,)),
+                      //child: Image.asset(c.image, fit: BoxFit.fitWidth,)
+                      child: Icon(Icons.directions_car, size: 80,)
+                  ),
                 ),
               ),
-              constraints: BoxConstraints.expand(width: 400, height: 140),
+              constraints: BoxConstraints.expand(width: screenWidth, height: 90),
             ),
             Positioned(
               top: 0,
@@ -74,12 +78,12 @@ class ChecklistItem extends StatelessWidget {
         InkWell(
           onTap: () => showAnalyzeCheckScreen(c),
           child: Container(
-            margin: EdgeInsets.fromLTRB(22, 5, 22, 0),
+            margin: EdgeInsets.fromLTRB(12, 5, 22, 0),
             child: Text(
-              c.description,
+              c.title,
               style: Theme.of(context).textTheme.body1,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              overflow: TextOverflow.clip,
             ),
           ),
         ),

@@ -16,7 +16,7 @@ class AnalyzeCheckScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Details",
+          this.check.title,
           style: Theme.of(context).textTheme.overline,
         ),
       ),

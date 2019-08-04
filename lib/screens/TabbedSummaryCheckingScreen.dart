@@ -26,19 +26,31 @@ class _TabbedSummaryCheckingScreenState
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
-            IconButton(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                icon: Icon(
-                  Octicons.getIconData("checklist"),
-                  size: 40,
-                ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, '/checklistSummary')),
+            FlatButton(
+        padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: Text("Résultat", style: Theme.of(context).textTheme.body1.apply(
+                      color: Color.fromRGBO(31, 204, 115, 1),
+                    ),),
+                  ),
+                  Icon(
+                    Octicons.getIconData("checklist"),
+                    size: 25,
+                    color: Color.fromRGBO(31, 204, 115, 1),
+                  )
+                ],
+              ),
+              onPressed: () =>
+        Navigator.pushNamed(context, '/checklistSummary'),
+            ),
           ],
           leading: IconButton(
               icon: Icon(
                 AntDesign.getIconData("home"),
-                size: 40,
+                size: 25,
               ),
               onPressed: () => Navigator.pushNamed(context, "/")),
         ),
@@ -60,14 +72,14 @@ class _TabbedSummaryCheckingScreenState
             tabs: [
               Tab(
                   text: "Intérieur",
-                  icon: Icon(MaterialCommunityIcons.getIconData("steering"), size: 35,)),
+                  icon: Icon(MaterialCommunityIcons.getIconData("steering"), size: 25,)),
               Tab(
                   text: "Extérieur",
-                  icon: Icon(FontAwesome.getIconData("car"), size: 35,)),
+                  icon: Icon(FontAwesome.getIconData("car"), size: 25,)),
               Tab(
                   text: "Moteur",
-                  icon: Icon(MaterialCommunityIcons.getIconData("oil"),size: 35,)),
-              Tab(text: "Papiers", icon: Icon(Entypo.getIconData("documents"),size: 35,)),
+                  icon: Icon(MaterialCommunityIcons.getIconData("oil"),size: 25,)),
+              Tab(text: "Papiers", icon: Icon(Entypo.getIconData("documents"),size: 25,)),
             ],
           ),
         ),

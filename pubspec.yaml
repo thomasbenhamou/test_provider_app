@@ -40,6 +40,8 @@ flutter:
   assets:
     - data/interior_checks.json
     - assets/images/car_interior.jpeg
+    - assets/images/car_exterior.jpeg
+    - assets/images/car_motor.jpeg
 
   fonts:
     - family: Advent Pro
