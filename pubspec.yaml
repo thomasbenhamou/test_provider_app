@@ -24,7 +24,8 @@ dependencies:
   sqflite: ^1.1.6+1
   path_provider: ^1.1.0
   flutter_icons: ^0.1.4
-
+  flutter_svg: ^0.14.0
+  carousel_pro: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -42,6 +43,12 @@ flutter:
     - assets/images/car_interior.jpeg
     - assets/images/car_exterior.jpeg
     - assets/images/car_motor.jpeg
+    - assets/svg/air-conditioner-4.svg
+    - assets/svg/car-lights-1.svg
+    - assets/svg/windshield-1.svg
+    - assets/svg/car-key.svg
+    - assets/svg/alloy-wheel-7.svg
+    - assets/svg/seat-belt.svg
 
   fonts:
     - family: Advent Pro
