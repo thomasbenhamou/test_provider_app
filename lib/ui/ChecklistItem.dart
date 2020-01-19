@@ -3,6 +3,7 @@ import 'package:test_provider_app/model/ChecksModel.dart';
 import 'package:test_provider_app/model/ChecksData.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:test_provider_app/screens/AnalyzeCheckScreen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChecklistItem extends StatelessWidget {
   const ChecklistItem({
@@ -18,6 +19,7 @@ class ChecklistItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     void handleOnPress(int checkNb) {
       if (checks.isCheckedInterior(checkNb)) {
@@ -36,58 +38,64 @@ class ChecklistItem extends StatelessWidget {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Stack(
-          overflow: Overflow.visible,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(12, 18, 12, 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: InkWell(
-                  onTap: () => showAnalyzeCheckScreen(c),
-                  child: Hero(
-                      tag: 'checkHero' + c.nb.toString(),
-                      //child: Image.asset(c.image, fit: BoxFit.fitWidth,)
-                      child: Icon(Icons.directions_car, size: 80,)
+    return Container(
+      width: screenWidth / 2,
+
+      child: Column(
+        children: <Widget>[
+          Stack(
+            overflow: Overflow.visible,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(border: Border.all(width: 1, color: Colors.grey[300]), borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.fromLTRB(9, 30, 9, 9),
+                margin: EdgeInsets.all(15),
+                height: screenHeight / 7,
+                child:  InkWell(
+                    onTap: () => showAnalyzeCheckScreen(c),
+                    child: Hero(
+                        tag: 'checkHero' + c.nb.toString(),
+                        child: SvgPicture.asset(c.icon, fit: BoxFit.fitHeight,)
+                    ),
                   ),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  color: Colors.grey[50],
+                  child: IconButton(
+                    highlightColor: Colors.transparent,
+                      splashColor: checks.isCheckedInterior(c.nb) == null
+                          ? Colors.grey[300]
+                          : Color.fromRGBO(31, 204, 115, 1),
+                      padding: EdgeInsets.all(0),
+                      icon: Icon(MaterialCommunityIcons.getIconData(
+                          "checkbox-marked-circle")),
+                      color: checks.isCheckedInterior(c.nb) == null
+                          ? Color.fromRGBO(31, 204, 115, 0.95)
+                          : Colors.grey[300],
+                      iconSize: 40,
+                      onPressed: () => handleOnPress(c.nb)),
                 ),
               ),
-              constraints: BoxConstraints.expand(width: screenWidth, height: 90),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: IconButton(
-                  splashColor: checks.isCheckedInterior(c.nb)
-                      ? Colors.grey[300]
-                      : Color.fromRGBO(31, 204, 115, 1),
-                  padding: EdgeInsets.all(0),
-                  icon: Icon(MaterialCommunityIcons.getIconData(
-                      "checkbox-marked-circle")),
-                  color: checks.isCheckedInterior(c.nb)
-                      ? Color.fromRGBO(31, 204, 115, 0.95)
-                      : Colors.grey[300],
-                  iconSize: 55,
-                  onPressed: () => handleOnPress(c.nb)),
-            ),
-          ],
-        ),
-        InkWell(
-          onTap: () => showAnalyzeCheckScreen(c),
-          child: Container(
-            margin: EdgeInsets.fromLTRB(12, 5, 22, 0),
-            child: Text(
-              c.title,
-              style: Theme.of(context).textTheme.body1,
-              maxLines: 1,
-              overflow: TextOverflow.clip,
+            ],
+          ),
+          InkWell(
+            onTap: () => showAnalyzeCheckScreen(c),
+            child: Container(
+              margin: EdgeInsets.fromLTRB(12, 5, 22, 0),
+              child: Text(
+                c.title,
+                style: Theme.of(context).textTheme.body1,
+                maxLines: 1,
+                overflow: TextOverflow.clip,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

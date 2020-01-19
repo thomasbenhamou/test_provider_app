@@ -19,7 +19,8 @@ class InteriorDetailCheckingScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               ChecksData cd = checksDataFromJson(snapshot.data.toString());
               List<Check> checksData = cd.checks;
-              return ListView.builder(
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemCount: checksData == null ? 0 : checksData.length,
                   itemBuilder: (BuildContext context, int index) {
                     Check c = checksData[index];

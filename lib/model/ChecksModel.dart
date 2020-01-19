@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class ChecksModel extends ChangeNotifier {
   ///Initial state
   Map<int, bool> interior = {1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
-  Map<int, bool> exterior = {1: false, 2: false, 3: false};
-  Map<int, bool> papers = {1: false, 2: false, 3: false};
-  Map<int, bool> engine = {1: false, 2: false, 3: false};
+  Map<int, bool> exterior = {1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
+  Map<int, bool> papers = {1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
+  Map<int, bool> engine = {1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
 
   bool isPristine = true;
   int currentCheckListId;

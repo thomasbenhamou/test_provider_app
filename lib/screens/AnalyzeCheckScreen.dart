@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_provider_app/model/ChecksData.dart';
 import 'package:test_provider_app/ui/TwoButtonsRow.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 class AnalyzeCheckScreen extends StatelessWidget {
   Check check;
@@ -32,9 +33,21 @@ class AnalyzeCheckScreen extends StatelessWidget {
                           child: InkWell(
                             onTap: () => onTapHero(),
                             child: Hero(
-                                tag: 'checkHero1',
-                                child: Image.asset(
-                                  this.check.image,
+                                tag: 'checkHero' + this.check.nb.toString(),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 300,
+                                  child: Carousel(
+                                    autoplay: false,
+                                    dotBgColor: Colors.transparent,
+                                    dotSize: 5,
+                                    dotColor: Colors.grey[300],
+                                    dotIncreasedColor: Colors.grey[300],
+                                    images: [
+                                      Image.asset(this.check.images[0]),
+                                      Image.asset(this.check.images[1])
+                                    ],
+                                  ),
                                 )),
                           ),
                         ),

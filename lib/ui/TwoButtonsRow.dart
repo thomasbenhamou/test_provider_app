@@ -29,7 +29,6 @@ class TwoButtonsRow extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.grey[50],
       margin: EdgeInsets.fromLTRB(5, 10, 5, 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,27 +36,21 @@ class TwoButtonsRow extends StatelessWidget {
           Expanded(
             child: Container(
               height: 70,
-              decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
-              ),
-              child: FlatButton.icon(
+              child: FloatingActionButton(
+                heroTag: "button" + check.nb.toString() + "_1",
+                backgroundColor: Colors.redAccent,
                   onPressed: () => uncheckIt(check.nb),
-                  icon: Icon(Octicons.getIconData("thumbsdown")),
-                  label: Text("Pas bon.")),
+                  child: Icon(Octicons.getIconData("thumbsdown"))),
             ),
           ),
           Expanded(
             child: Container(
               height: 70,
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(31, 204, 115, 1),
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))
-              ),
-              child: FlatButton.icon(
+              child: FloatingActionButton(
+                heroTag: "button" + check.nb.toString() + "_2",
+                backgroundColor: Colors.greenAccent,
                   onPressed: () => checkIt(check.nb),
-                  icon: Icon(Octicons.getIconData("thumbsup")),
-                  label: Text("C'est OK!")),
+                  child: Icon(Octicons.getIconData("thumbsup"))),
             ),
           ),
         ],

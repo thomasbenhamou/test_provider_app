@@ -27,14 +27,16 @@ class ChecksData {
 class Check {
   String category;
   int nb;
-  String image;
+  String icon;
+  List<String> images;
   String title;
   String description;
 
   Check({
     this.category,
     this.nb,
-    this.image,
+    this.icon,
+    this.images,
     this.title,
     this.description,
   });
@@ -42,7 +44,8 @@ class Check {
   factory Check.fromJson(Map<String, dynamic> json) => new Check(
     category: json["category"],
     nb: json["nb"],
-    image: json["image"],
+    icon: json["icon"],
+    images: new List<String>.from(json["images"].map((x) => x)),
     title: json["title"],
     description: json["description"],
   );
@@ -50,7 +53,8 @@ class Check {
   Map<String, dynamic> toJson() => {
     "category": category,
     "nb": nb,
-    "image": image,
+    "icon": icon,
+    "images": new List<dynamic>.from(images.map((x) => x)),
     "title": title,
     "description": description,
   };

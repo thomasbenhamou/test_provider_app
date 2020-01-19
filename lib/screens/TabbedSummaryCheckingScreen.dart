@@ -32,8 +32,9 @@ class _TabbedSummaryCheckingScreenState
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                    child: Text("Résultat", style: Theme.of(context).textTheme.body1.apply(
+                    child: Text("Checkliste", style: Theme.of(context).textTheme.body1.apply(
                       color: Color.fromRGBO(31, 204, 115, 1),
+                      fontSizeFactor: 1.1
                     ),),
                   ),
                   Icon(
