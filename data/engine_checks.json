@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "category": "engine",
+      "nb": 1,
+      "image": "assets/images/car_interior.jpeg",
+      "title": "Démarrage",
+      "description": "Avec pas plus de 2 coups de clés, le moteur doit démarrer. Le ralenti (sans accélérer) doit être stable, sans acoups ni hocquet."
+    },
+    {
+      "category": "engine",
+      "nb": 2,
+      "image": "assets/images/car_exterior.jpeg",
+      "title": "Turbo",
+      "description": "Pour les véhicules équipés, on doit entendre distinctement la mise en route du turbo à partir de 2500 tours/minute environ sur les moteurs diesel."
+    },
+    {
+      "category": "engine",
+      "nb": 3,
+      "image": "assets/images/car_motor.jpeg",
+      "title": "Direction",
+      "description": "La direction ne doit pas présenter de jeu : dès qu'on touche au volant les roues doivent bouger, il ne doit pas y avoir de zone morte avant de faire bouger les roues. La direction assistée ne doit pas présenter de points durs (en faisant tourner complétement le volant de la butée gauche à la butée droite, et inversement. Selon les véhicules, on doit ressentir que la direction se durçit lorsque la voiture prend de la vitesse."
+    },
+    {
+      "category": "engine",
+      "nb": 4,
+      "image": "assets/images/car_motor.jpeg",
+      "title": "Moteur",
+      "description": "Le moteur doit être propre, sans excès car cela pourrait démontrer une envie de cacher un défaut. Il ne doit pas y avoir de traces de fuite d'huile."
+    },
+    {
+      "category": "engine",
+      "nb": 5,
+      "image": "assets/images/car_motor.jpeg",
+      "title": "Batterie",
+      "description": "Il ne doit pas y avoir de traces de rouille sur les cosses."
+    },
+    
+  ]
+}

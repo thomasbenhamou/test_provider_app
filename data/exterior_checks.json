@@ -1,0 +1,18 @@
+{
+  "checks": [
+    {
+      "category": "exterior",
+      "nb": 1,
+      "image": "assets/images/car_exterior.jpeg",
+      "title": "Pneus",
+      "description": "L'usure des pneus doit être uniforme sur toute la largeur de la gomme : c'est un bon indicateur du correct parrallélisme du véhicule. Il doit rester au moins 4mm de profondeur dans les entailles."
+    },
+    {
+      "category": "exterior",
+      "nb": 2,
+      "image": "assets/images/car_exterior.jpeg",
+      "title": "Carrosserie",
+      "description": "Les petites rayures et les impacts ne sont pas forcément un point négatif. Mais si le véhicule en est couvert le propriétaire n'est clairement pas soucieux de l'état de son véhicule. Surtout, vérifier si les points d'impacts et les rayures ne présentent pas de traces de rouille : les réparations peuvent s'avérer très difficiles. Des éléments repeints, voire une carrosserie entière repeinte, sont souvent le signe de défauts à cacher, voire d'un choc à maquiller."
+    }
+  ]
+}
